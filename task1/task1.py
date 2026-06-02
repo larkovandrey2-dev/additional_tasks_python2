@@ -6,13 +6,13 @@ class StrictConfig:
 
     def __setattr__(self, name: str, value: object) -> None:
         if name not in self._values:
-            raise AttributeError(f"cannot create new field {name}")
+            raise AttributeError(f"cannot create new field {name}!r")
         self._values[name] = value
     def __getattr__(self, name: str) -> object:
         values = self._values
         if name in values:
             return values[name]
-        raise AttributeError(f"unknown field {name}")
+        raise AttributeError(f"unknown field {name!r}")
     def fields(self) -> tuple[str, ...]:
         return self._fields
     def as_dict(self) -> dict[str, object]:

@@ -25,10 +25,10 @@ class ValidatedRecord:
         fields = self._fields()
         for name in kwargs:
             if name not in fields:
-                raise TypeError(f"unknown field {name}")
+                raise TypeError(f"unknown field {name!r}")
         for name in fields:
             if name not in kwargs:
-                raise TypeError(f"missing field {name}")
+                raise TypeError(f"missing field {name!r}")
             setattr(self, name, kwargs[name])
     def to_dict(self) -> dict[str, object]:
         return {name: getattr(self, name) for name in self._fields()}
